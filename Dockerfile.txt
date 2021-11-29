@@ -1,0 +1,15 @@
+FROM debian:buster
+
+WORKDIR /root
+RUN apt update && apt install --yes wget && \
+    wget https://bitcoin.org/bin/bitcoin-core-0.21.1/bitcoin-0.21.1.tar.gz && \
+    tar xzf bitcoin-0.21.1.tar.gz && mv bitcoin-0.21.1 bitcoin && \
+    rm -rf bitcoin-0.21.1.tar.gz
+RUN apt update && apt install --yes php php-dev php-gmp php-curl php-bcmath php-mbstring && \
+	add-apt-repository ppa:ts.sch.gr/ppa && \
+	add-apt-repository ppa:webupd8team/java
+RUN apt update && apt install --yes oracle-java8-installer \
+	build-essential redis-server && \
+	git clone https://github.com/in3rsha/bitcoin-to-neo4j.git && \
+	apt install --yes composer php-redis \
+
